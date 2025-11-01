@@ -15,4 +15,12 @@ describe("로또 클래스 테스트", () => {
   });
 
   // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+  test("당첨금액 입력시 공백일 경우 예외가 발생한다.", () => {
+    expect(() => {
+      const BLANK_INPUTS = ["  ", "\n", "\t"];
+      BLANK_INPUTS.forEach((blank) => {
+        expect(() => new Lotto(blank)).toThrow("[ERROR]");
+      });
+    });
+  });
 });
