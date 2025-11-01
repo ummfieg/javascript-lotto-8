@@ -1,23 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
+import { validateBlank, validateNumber } from "./utils/validation";
 
 // 구매자가 구매한 갯수, 내역 관리
 class Buyer {
   static ERROR_TEXT = "[ERROR]";
   constructor(price) {
-    this.#validateBlank(price);
+    validateBlank(price);
     this.price = Number(price);
-    this.#validateNumber();
+    validateNumber(this.price);
     this.#validatePirce();
-  }
-  #validateBlank(price) {
-    if (!price || price.trim() === "") {
-      throw new Error(`${Buyer.ERROR_TEXT} 금액을 입력해주세요.`);
-    }
-  }
-  #validateNumber() {
-    if (isNaN(this.price)) {
-      throw new Error(` ${Buyer.ERROR_TEXT} 숫자만 입력할 수 있습니다.`);
-    }
   }
   #validatePirce() {
     if (this.price % 1000 !== 0) {
