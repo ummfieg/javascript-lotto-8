@@ -13,19 +13,18 @@ class Lotto {
     validateBlank(numbers);
     this.#validateComma(numbers);
     const SPLITED = this.splitInput(numbers);
-    validateNumber(SPLITED);
-    this.#validateInteger(SPLITED);
-    this.#validateRange(SPLITED);
-    this.#validateDuplicate(SPLITED);
-    this.#validateLimitNumbers(SPLITED);
-    this.#numbers = numbers;
+    const NUMBER_ARRAY = validateNumber(SPLITED);
+    this.#validateInteger(NUMBER_ARRAY);
+    this.#validateRange(NUMBER_ARRAY);
+    this.#validateDuplicate(NUMBER_ARRAY);
+    this.#validateLimitNumbers(NUMBER_ARRAY);
+    this.#numbers = NUMBER_ARRAY;
     this.lottoCount = lottoCount;
   }
 
   #validateComma(numbers) {
-    console.log(typeof numbers);
-    const COMMA_PATTERN = /(^,|,,|,$|[^0-9,])/;
-    if (!COMMA_PATTERN.test(numbers)) {
+    const COMMA_PATTERN = /(^,|,,|,$|[^0-9.,])/;
+    if (COMMA_PATTERN.test(numbers)) {
       throw new Error("[ERROR] 숫자는 쉼표(,)로 구분되어야 합니다.");
     }
   }
@@ -60,6 +59,7 @@ class Lotto {
     }
     return [InputNumbers];
   }
+
   #validateInteger(InputNumbers) {
     InputNumbers.forEach((num) => {
       if (!Number.isInteger(num)) {

@@ -18,7 +18,8 @@ export const validateNumber = (value) => {
   }
 
   const CONVERTED_NUMBERS = Number(value); //price로직, 보너스
-  if (isNaN(CONVERTED_NUMBERS))
+  if (isNaN(CONVERTED_NUMBERS)) {
     throw new Error(`${ERROR_TEXT} 숫자만 입력할 수 있습니다.`);
+  }
   return CONVERTED_NUMBERS;
 };
