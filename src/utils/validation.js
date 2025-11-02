@@ -1,8 +1,13 @@
 export const ERROR_TEXT = "[ERROR]";
-//TODO: 에러메시지 재사용 로직으로 변경
-export const validateBlank = (value) => {
+export const ERROR_MESSAGE = Object.freeze({
+  priceNumber: "금액을 입력해주세요",
+  winNumber: "당첨번호를 입력해주세요",
+  bonuseNumber: "보너스번호를 입력해주세요",
+});
+
+export const validateBlank = (value, errorMessage) => {
   if (typeof value === "string" && value.trim() === "") {
-    throw new Error(`${ERROR_TEXT} 금액을 입력해주세요.`);
+    throw new Error(`${ERROR_TEXT} ${errorMessage}`);
   }
   return value;
 };
