@@ -1,13 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
-import { validateBlank, validateNumber } from "./utils/validation";
+import { validateBlank, validateNumber } from "./utils/validation.js";
 
 // 구매자가 구매한 갯수, 내역 관리
 class Buyer {
   static ERROR_TEXT = "[ERROR]";
   constructor(price) {
     validateBlank(price);
-    this.price = Number(price);
-    validateNumber(this.price);
+    this.price = validateNumber(price);
     this.#validatePirce();
   }
   #validatePirce() {

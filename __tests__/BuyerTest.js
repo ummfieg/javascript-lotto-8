@@ -16,19 +16,21 @@ describe("구매자 클래스 금액 테스트", () => {
     // when
     const VALIDATED_COST = new Buyer(VALID_COST);
     //then
-    expect(VALIDATED_COST.price).toEqual(5000);
+    expect(VALIDATED_COST.price).toBe(5000);
   });
   test("금액 입력시 숫자가 아닐경우 예외가 발생한다.", () => {
     //given
     const INVALID_COST = ["stirng", "@"];
-    //when
+    //when-then
     INVALID_COST.forEach((cost) => {
       expect(() => new Buyer(cost)).toThrow("[ERROR]");
     });
   });
 
   test("금액 입력시 공백을 입력할 경우 예외가 발생한다.", () => {
+    //given
     const BLANK_INPUTS = ["  ", "\n", "\t"];
+    //when-then
     BLANK_INPUTS.forEach((blank) => {
       expect(() => new Buyer(blank)).toThrow("[ERROR]");
     });
@@ -44,7 +46,3 @@ describe("구매자 클래스 금액 테스트", () => {
     expect(TICKET_COUNT).toEqual(EXPECTED_TICKET_COUNT);
   });
 });
-
-// describe("구매자 클래스 입력 번호 테스트", () => {
-//   test("당첨");
-// });
