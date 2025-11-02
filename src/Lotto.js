@@ -11,11 +11,31 @@ class Lotto {
   constructor(numbers, lottoCount) {
     this.enteredNumbers = new Set();
     validateBlank(numbers);
-    validateNumber(numbers);
+    this.#validateComma(numbers);
+    const SPLITED = this.splitInput(numbers);
+    validateNumber(SPLITED);
+    this.#validateInteger(SPLITED);
+    this.#validateRange(SPLITED);
+    this.#validateDuplicate(SPLITED);
+    this.#validateLimitNumbers(SPLITED);
     this.#numbers = numbers;
-    this.#validateDuplicate(this.#numbers);
-    this.#validateLimitNumbers(this.#numbers);
     this.lottoCount = lottoCount;
+  }
+
+  #validateComma(numbers) {
+    console.log(typeof numbers);
+    const COMMA_PATTERN = /(^,|,,|,$|[^0-9,])/;
+    if (!COMMA_PATTERN.test(numbers)) {
+      throw new Error("[ERROR] 숫자는 쉼표(,)로 구분되어야 합니다.");
+    }
+  }
+
+  #validateRange(SPLITED_NUMBER) {
+    SPLITED_NUMBER.forEach((num) => {
+      if (num > 45 || num < 1) {
+        throw new Error("[ERROR] 당첨금액은 1부터45사이의 값이어야 합니다.");
+      }
+    });
   }
 
   #validateLimitNumbers(InputNumbers) {
@@ -25,12 +45,27 @@ class Lotto {
   }
 
   #validateDuplicate(InputNumbers) {
-    for (let num of InputNumbers) {
+    InputNumbers.forEach((num) => {
       if (this.enteredNumbers.has(num)) {
         throw new Error("[ERROR] 중복된 당첨번호입니다.");
       }
       this.enteredNumbers.add(num);
+    });
+  }
+
+  splitInput(InputNumbers) {
+    if (typeof InputNumbers === "string") {
+      const SPLITED_NUMBER = InputNumbers.split(",");
+      return SPLITED_NUMBER;
     }
+    return [InputNumbers];
+  }
+  #validateInteger(InputNumbers) {
+    InputNumbers.forEach((num) => {
+      if (!Number.isInteger(num)) {
+        throw new Error("[ERROR] 번호는 정수만 입력할 수 있습니다.");
+      }
+    });
   }
 }
 
