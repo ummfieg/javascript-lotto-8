@@ -42,4 +42,13 @@ describe("로또 클래스 테스트", () => {
       new Lotto(INVALDATE_VALUE);
     }).toThrow("[ERROR]");
   });
+  test("구매자가 입력한 당첨번호는 정상입력일 경우 통과", () => {
+    //given
+    const VALID_NUMBER = "1,12,7,34,22,28";
+    //when
+    const RESULT = new Lotto(VALID_NUMBER);
+    const VALID_RESULT = RESULT.getInputNumber();
+    //then
+    expect(VALID_RESULT).toEqual([1, 12, 7, 34, 22, 28]);
+  });
 });

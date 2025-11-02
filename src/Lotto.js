@@ -1,14 +1,12 @@
 // numbers 이외의 인스턴스 변수(필드) 추가할 수 없음.
 // numbers의 접근제한자(#) 변경할 수 없다.
 
-import { Console } from "@woowacourse/mission-utils";
-import { Random } from "@woowacourse/mission-utils";
 import { validateBlank, validateNumber } from "./utils/validation.js";
 
 class Lotto {
   #numbers;
 
-  constructor(numbers, lottoCount) {
+  constructor(numbers) {
     this.enteredNumbers = new Set();
     validateBlank(numbers);
     this.#validateComma(numbers);
@@ -19,7 +17,7 @@ class Lotto {
     this.#validateDuplicate(NUMBER_ARRAY);
     this.#validateLimitNumbers(NUMBER_ARRAY);
     this.#numbers = NUMBER_ARRAY;
-    this.lottoCount = lottoCount;
+    this.getInputNumber();
   }
 
   #validateComma(numbers) {
@@ -66,6 +64,9 @@ class Lotto {
         throw new Error("[ERROR] 번호는 정수만 입력할 수 있습니다.");
       }
     });
+  }
+  getInputNumber() {
+    return [...this.#numbers];
   }
 }
 
