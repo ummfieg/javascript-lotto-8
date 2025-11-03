@@ -1,13 +1,14 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import {
   ERROR_MESSAGE,
+  ERROR_TEXT,
   validateBlank,
   validateNumber,
 } from "./utils/validation.js";
 
-// 구매자가 구매한 갯수, 내역 관리
 class Buyer {
-  static ERROR_TEXT = "[ERROR]";
+  static TICKET_PRICE = 1000;
+  static UNIT = 1000;
   #price;
 
   constructor(price) {
@@ -18,15 +19,15 @@ class Buyer {
     this.getPrice();
   }
   #validatePirce(VALID_PRICE) {
-    if (VALID_PRICE % 1000 !== 0) {
+    if (VALID_PRICE % Buyer.UNIT !== 0) {
       throw new Error(
-        ` ${Buyer.ERROR_TEXT} 입력할 수 있는 금액은 1000원 단위여야 합니다.`
+        ` ${ERROR_TEXT} 입력할 수 있는 금액은 ${Buyer.UNIT}원 단위여야 합니다.`
       );
     }
   }
 
   countTickets() {
-    const TICKET_COUNT = this.#price / 1000;
+    const TICKET_COUNT = this.#price / Buyer.TICKET_PRICE;
     return TICKET_COUNT;
   }
 

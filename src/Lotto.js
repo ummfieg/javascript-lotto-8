@@ -1,5 +1,6 @@
 import {
   ERROR_MESSAGE,
+  ERROR_TEXT,
   splitInput,
   validateBlank,
   validateInteger,
@@ -27,20 +28,20 @@ class Lotto {
   #validateComma(numbers) {
     const COMMA_PATTERN = /(^,|,,|,$|[^0-9.,])/;
     if (COMMA_PATTERN.test(numbers)) {
-      throw new Error("[ERROR] 숫자는 쉼표(,)로 구분되어야 합니다.");
+      throw new Error(`${ERROR_TEXT} 숫자는 쉼표(,)로 구분되어야 합니다.`);
     }
   }
 
   #validateWinLength(InputNumbers) {
     if (InputNumbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(`${ERROR_TEXT} 로또 번호는 6개여야 합니다.`);
     }
   }
 
   #validateDuplicate(InputNumbers) {
     InputNumbers.forEach((num) => {
       if (this.enteredNumbers.has(num)) {
-        throw new Error("[ERROR] 중복된 당첨번호입니다.");
+        throw new Error(`${ERROR_TEXT} 중복된 당첨번호입니다.`);
       }
       this.enteredNumbers.add(num);
     });

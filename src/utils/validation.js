@@ -39,14 +39,14 @@ export const splitInput = (InputNumbers) => {
 export const validateInteger = (InputNumbers) => {
   InputNumbers.forEach((num) => {
     if (!Number.isInteger(num)) {
-      throw new Error("[ERROR] 번호는 정수만 입력할 수 있습니다.");
+      throw new Error(`${ERROR_TEXT} 번호는 정수만 입력할 수 있습니다.`);
     }
   });
 };
 export const validateRange = (SPLITED_NUMBER) => {
   SPLITED_NUMBER.forEach((num) => {
     if (num > 45 || num < 1) {
-      throw new Error("[ERROR] 번호는 1부터45사이의 값이어야 합니다.");
+      throw new Error(`${ERROR_TEXT} 번호는 1부터45사이의 값이어야 합니다.`);
     }
   });
 };

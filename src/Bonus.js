@@ -1,5 +1,6 @@
 import {
   ERROR_MESSAGE,
+  ERROR_TEXT,
   splitInput,
   validateBlank,
   validateInteger,
@@ -21,13 +22,13 @@ class Bonus {
 
   #validateBonusLength(bonusNumber) {
     if (bonusNumber.length !== 1) {
-      throw new Error("[ERROR] 보너스 번호는 1개여야 합니다.");
+      throw new Error(`${ERROR_TEXT} 보너스 번호는 1개여야 합니다.`);
     }
   }
   #validateDuplicateWithWinNumber(bonusNumber, winNumbers) {
     const [BONUS_NUM] = bonusNumber;
     if (winNumbers.includes(BONUS_NUM)) {
-      throw new Error("[ERROR] 보너스 번호가 당첨번호와 중복됩니다.");
+      throw new Error(`${ERROR_TEXT} 보너스 번호가 당첨번호와 중복됩니다.`);
     }
   }
 }
