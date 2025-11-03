@@ -10,10 +10,10 @@ class App {
       let buyer;
       while (true) {
         try {
-          const purchaseAmount = await Console.readLineAsync(
+          const PURCHASE_PRICE = await Console.readLineAsync(
             "구입금액을 입력해 주세요.\n"
           );
-          buyer = new Buyer(purchaseAmount);
+          buyer = new Buyer(PURCHASE_PRICE);
           break;
         } catch (e) {
           Console.print(e.message);
@@ -39,16 +39,25 @@ class App {
           Console.print(e.message);
         }
       }
+
       const WIN_NUMBERS = lotto.getInputNumber();
-      const INPUT_BONUS_NUMBER = await Console.readLineAsync(
-        "보너스 번호를 입력해 주세요\n"
-      );
-      const BONUS_NUMBER = new Bonus(INPUT_BONUS_NUMBER, WIN_NUMBERS);
+      let bonus;
+      while (true) {
+        try {
+          const INPUT_BONUS_NUMBER = await Console.readLineAsync(
+            "보너스 번호를 입력해 주세요\n"
+          );
+          bonus = new Bonus(INPUT_BONUS_NUMBER, WIN_NUMBERS);
+          break;
+        } catch (e) {
+          Console.print(e.message);
+        }
+      }
 
       const RESULT_CLAC = new Calculator(
         PUBLISHED_NUMBERS,
         WIN_NUMBERS,
-        BONUS_NUMBER.bonusNumber,
+        bonus.bonusNumber,
         INPUT_PRICE
       );
       Console.print("당첨 통계");
