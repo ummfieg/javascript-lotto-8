@@ -58,6 +58,14 @@ class Calculator {
     const RATE_ROUNDED = Math.round(TOTAL_RATE * 100) / 100;
     return Number(RATE_ROUNDED.toFixed(1));
   }
+
+  getResultString() {
+    const RESUT_STRING = Object.entries(this.#result).map(
+      ([label, { count, prize }]) =>
+        `${label} (${prize.toLocaleString()}원) - ${count}개`
+    );
+    return RESUT_STRING.join("\n");
+  }
 }
 
 export default Calculator;
