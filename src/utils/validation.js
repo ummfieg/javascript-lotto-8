@@ -2,7 +2,7 @@ export const ERROR_TEXT = "[ERROR]";
 export const ERROR_MESSAGE = Object.freeze({
   priceNumber: "금액을 입력해주세요",
   winNumber: "당첨번호를 입력해주세요",
-  bonuseNumber: "보너스번호를 입력해주세요",
+  bonusNumber: "보너스번호를 입력해주세요",
 });
 
 export const validateBlank = (value, errorMessage) => {
