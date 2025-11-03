@@ -1,21 +1,25 @@
-// numbers 이외의 인스턴스 변수(필드) 추가할 수 없음.
-// numbers의 접근제한자(#) 변경할 수 없다.
-
-import { validateBlank, validateNumber } from "./utils/validation.js";
+import {
+  ERROR_MESSAGE,
+  splitInput,
+  validateBlank,
+  validateInteger,
+  validateNumber,
+  validateRange,
+} from "./utils/validation.js";
 
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
+  constructor(numbers, bonuseNumber) {
     this.enteredNumbers = new Set();
-    validateBlank(numbers);
+    validateBlank(numbers, ERROR_MESSAGE.winNumber);
     this.#validateComma(numbers);
-    const SPLITED = this.splitInput(numbers);
+    const SPLITED = splitInput(numbers);
     const NUMBER_ARRAY = validateNumber(SPLITED);
-    this.#validateInteger(NUMBER_ARRAY);
-    this.#validateRange(NUMBER_ARRAY);
+    validateInteger(NUMBER_ARRAY);
+    validateRange(NUMBER_ARRAY);
     this.#validateDuplicate(NUMBER_ARRAY);
-    this.#validateLimitNumbers(NUMBER_ARRAY);
+    this.#validateWinLength(NUMBER_ARRAY);
     this.#numbers = NUMBER_ARRAY;
     this.getInputNumber();
   }
@@ -27,15 +31,7 @@ class Lotto {
     }
   }
 
-  #validateRange(SPLITED_NUMBER) {
-    SPLITED_NUMBER.forEach((num) => {
-      if (num > 45 || num < 1) {
-        throw new Error("[ERROR] 당첨금액은 1부터45사이의 값이어야 합니다.");
-      }
-    });
-  }
-
-  #validateLimitNumbers(InputNumbers) {
+  #validateWinLength(InputNumbers) {
     if (InputNumbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
@@ -50,21 +46,6 @@ class Lotto {
     });
   }
 
-  splitInput(InputNumbers) {
-    if (typeof InputNumbers === "string") {
-      const SPLITED_NUMBER = InputNumbers.split(",");
-      return SPLITED_NUMBER;
-    }
-    return [InputNumbers];
-  }
-
-  #validateInteger(InputNumbers) {
-    InputNumbers.forEach((num) => {
-      if (!Number.isInteger(num)) {
-        throw new Error("[ERROR] 번호는 정수만 입력할 수 있습니다.");
-      }
-    });
-  }
   getInputNumber() {
     return [...this.#numbers];
   }
