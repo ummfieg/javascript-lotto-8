@@ -1,10 +1,11 @@
 class Calculator {
   #result;
 
-  constructor(publishedNum, winNum, bonuseNum, inputPrice) {
+  constructor(publishedNum, winNum, bonusNum, inputPrice) {
     this.publishedNum = publishedNum;
     this.winNum = winNum;
-    this.bonuseNum = bonuseNum;
+    //문자열/배열 → 숫자로 변환
+    this.bonusNum = Number(bonusNum);
     this.inputPrice = inputPrice;
 
     this.#result = {
@@ -19,29 +20,20 @@ class Calculator {
 
   #calculateResults() {
     this.publishedNum.forEach((ticket) => {
-      const MATCH_COUNT = this.#countMatches(ticket);
-      const BONUSE_MATCHED = this.#isBonusMatched(ticket, MATCH_COUNT);
+      const MATCHED = ticket.filter((num) => this.winNum.includes(num));
+      const MATCH_COUNT = MATCHED.length;
 
       if (MATCH_COUNT === 6) return this.#result["6개 일치"].count++;
-      if (MATCH_COUNT === 5 && BONUSE_MATCHED)
-        return this.#result["5개 일치, 보너스 볼 일치"].count++;
-      if (MATCH_COUNT === 5) return this.#result["5개 일치"].count++;
+      if (MATCH_COUNT === 5) {
+        const REMAIN = ticket.filter((num) => !this.winNum.includes(num));
+        if (REMAIN.includes(this.bonusNum))
+          return this.#result["5개 일치, 보너스 볼 일치"].count++;
+
+        this.#result["5개 일치"].count++;
+      }
       if (MATCH_COUNT === 4) return this.#result["4개 일치"].count++;
       if (MATCH_COUNT === 3) return this.#result["3개 일치"].count++;
     });
-    return this.#result;
-  }
-  #countMatches(ticket) {
-    const ROUND_MATCHED_NUMBER = ticket.filter((num) =>
-      this.winNum.includes(num)
-    ).length;
-    return ROUND_MATCHED_NUMBER;
-  }
-
-  #isBonusMatched(ticket, matchCount) {
-    const MATCHED_BONUSE_NUMBER =
-      matchCount === 5 && ticket.includes(this.bonusNum);
-    return MATCHED_BONUSE_NUMBER;
   }
 
   calculateTotalPrize() {
