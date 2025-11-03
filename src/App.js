@@ -27,12 +27,19 @@ class App {
       PUBLISHED_NUMBERS.forEach((numbers) =>
         Console.print(`[${numbers.join(", ")}]`)
       );
-
-      const INPUT_WIN_NUMBER = await Console.readLineAsync(
-        "당첨번호를 입력해 주세요\n"
-      );
-      const LOTTO_NUMBER = new Lotto(INPUT_WIN_NUMBER);
-      const WIN_NUMBERS = LOTTO_NUMBER.getInputNumber();
+      let lotto;
+      while (true) {
+        try {
+          const INPUT_WIN_NUMBER = await Console.readLineAsync(
+            "당첨번호를 입력해 주세요\n"
+          );
+          lotto = new Lotto(INPUT_WIN_NUMBER);
+          break;
+        } catch (e) {
+          Console.print(e.message);
+        }
+      }
+      const WIN_NUMBERS = lotto.getInputNumber();
       const INPUT_BONUS_NUMBER = await Console.readLineAsync(
         "보너스 번호를 입력해 주세요\n"
       );
