@@ -22,16 +22,17 @@ class App {
       const TICKET_COUNT = buyer.countTickets();
       const PUBLISHED_NUMBERS = buyer.randomNumbers(TICKET_COUNT);
       const INPUT_PRICE = buyer.getPrice();
-
+      Console.print("");
       Console.print(`${TICKET_COUNT}개를 구매했습니다.`);
       PUBLISHED_NUMBERS.forEach((numbers) =>
         Console.print(`[${numbers.join(", ")}]`)
       );
+      Console.print("");
       let lotto;
       while (true) {
         try {
           const INPUT_WIN_NUMBER = await Console.readLineAsync(
-            "당첨번호를 입력해 주세요\n"
+            "당첨번호를 입력해 주세요.\n"
           );
           lotto = new Lotto(INPUT_WIN_NUMBER);
           break;
@@ -39,13 +40,13 @@ class App {
           Console.print(e.message);
         }
       }
-
       const WIN_NUMBERS = lotto.getInputNumber();
+      Console.print("");
       let bonus;
       while (true) {
         try {
           const INPUT_BONUS_NUMBER = await Console.readLineAsync(
-            "보너스 번호를 입력해 주세요\n"
+            "보너스 번호를 입력해 주세요.\n"
           );
           bonus = new Bonus(INPUT_BONUS_NUMBER, WIN_NUMBERS);
           break;
@@ -53,7 +54,7 @@ class App {
           Console.print(e.message);
         }
       }
-
+      Console.print("");
       const RESULT_CLAC = new Calculator(
         PUBLISHED_NUMBERS,
         WIN_NUMBERS,
