@@ -11,6 +11,7 @@ export const validateBlank = (value, errorMessage) => {
   }
   return value;
 };
+
 export const validateNumber = (value) => {
   if (Array.isArray(value)) {
     return value.map((num) => {
@@ -36,6 +37,7 @@ export const splitInput = (InputNumbers) => {
   }
   return [InputNumbers];
 };
+
 export const validateInteger = (InputNumbers) => {
   InputNumbers.forEach((num) => {
     if (!Number.isInteger(num)) {
