@@ -51,6 +51,13 @@ class Calculator {
     );
     return TOTAL_PRIZE;
   }
+
+  calculateRateReturn() {
+    const TOTAL_PRIZE = this.calculateTotalPrize();
+    const TOTAL_RATE = (TOTAL_PRIZE / this.inputPrice) * 100;
+    const RATE_ROUNDED = Math.round(TOTAL_RATE * 100) / 100;
+    return Number(RATE_ROUNDED.toFixed(1));
+  }
 }
 
 export default Calculator;
