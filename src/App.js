@@ -7,14 +7,21 @@ import Calculator from "./Calculator.js";
 class App {
   async run() {
     try {
-      const purchaseAmount = await Console.readLineAsync(
-        "구매금액을 입력해 주세요.\n"
-      );
-
-      const lottoBuyer = new Buyer(purchaseAmount);
-      const TICKET_COUNT = lottoBuyer.countTickets();
-      const PUBLISHED_NUMBERS = lottoBuyer.randomNumbers(TICKET_COUNT);
-      const INPUT_PRICE = lottoBuyer.getPrice();
+      let buyer;
+      while (true) {
+        try {
+          const purchaseAmount = await Console.readLineAsync(
+            "구입금액을 입력해 주세요.\n"
+          );
+          buyer = new Buyer(purchaseAmount);
+          break;
+        } catch (e) {
+          Console.print(e.message);
+        }
+      }
+      const TICKET_COUNT = buyer.countTickets();
+      const PUBLISHED_NUMBERS = buyer.randomNumbers(TICKET_COUNT);
+      const INPUT_PRICE = buyer.getPrice();
 
       Console.print(`${TICKET_COUNT}개를 구매했습니다.`);
       PUBLISHED_NUMBERS.forEach((numbers) =>
