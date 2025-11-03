@@ -1,5 +1,9 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { validateBlank, validateNumber } from "./utils/validation.js";
+import {
+  ERROR_MESSAGE,
+  validateBlank,
+  validateNumber,
+} from "./utils/validation.js";
 
 // 구매자가 구매한 갯수, 내역 관리
 class Buyer {
@@ -7,7 +11,7 @@ class Buyer {
   #price;
 
   constructor(price) {
-    validateBlank(price);
+    validateBlank(price, ERROR_MESSAGE.priceNumber);
     const VALID_PRICE = validateNumber(price);
     this.#validatePirce(VALID_PRICE);
     this.#price = VALID_PRICE;
@@ -30,7 +34,9 @@ class Buyer {
     const ROUND_COUNT = this.countTickets();
     const ROUND_NUMBERS = Object.freeze(
       Array.from({ length: ROUND_COUNT }, () =>
-        Object.freeze(Random.pickUniqueNumbersInRange(1, 45, 6))
+        Object.freeze(
+          Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
+        )
       )
     );
     return ROUND_NUMBERS;
