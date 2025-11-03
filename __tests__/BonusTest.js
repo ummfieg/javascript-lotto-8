@@ -1,4 +1,3 @@
-import "../src/Bonus.js";
 import Bonus from "../src/Bonus.js";
 
 describe("보너스 클래스 테스트", () => {
@@ -48,7 +47,6 @@ describe("보너스 클래스 테스트", () => {
     const BONUS_NUMBER = "7";
     const WIN_NUMBERS = [1, 2, 3, 4, 5, 6];
     const RESULT_BONUS = new Bonus(BONUS_NUMBER, WIN_NUMBERS);
-    console.log(RESULT_BONUS.bonusNumber);
     expect(RESULT_BONUS.bonusNumber).toEqual([7]);
   });
 });
